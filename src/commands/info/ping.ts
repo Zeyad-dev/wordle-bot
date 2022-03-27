@@ -115,7 +115,7 @@ export default new Command({
         const collector = msg.createMessageComponentCollector({
             filter,
         })
-        collector.on('collect', async (i) => {
+        /*collector.on('collect', async (i) => {
             if(tries >= 5) {
                 await msg.reply({content: 'You could not get the right word! The game is over'})
                 return collector.stop()
@@ -135,7 +135,7 @@ export default new Command({
                     return await msg.edit({content: `${message()}`})
                 }
             }
-        })
+        })*/
 
         function repeat(character, number) {
             let i = 1
