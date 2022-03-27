@@ -115,7 +115,7 @@ export default new Command({
         const collector = msg.createMessageComponentCollector({
             filter,
         })
-        collector.on("collect", async(i) => {
+        collector.on("collect", async (i) => {
             if(tries >= 5) {
                 await msg.reply({content: 'You could not get the right word! The game is over'})
                 return collector.stop()
