@@ -105,7 +105,7 @@ export default new Command({
         ]
         const guessed = []
         console.log(word)
-        const message = '```' + `${guessed.length == 5 ? guessed.join(" ") : guessed.join(" ") + repeat('_ ', guessed.length - 5)}` + '```'
+        const message = '```' + `${guessed.length === 5 ? guessed.join(" ") : guessed.join(" ") + repeat('_ ', guessed.length - 5)}` + '```'
         const msg : Message = (await interaction.reply({content: `${message}`, components: components(false), fetchReply: true}) as Message)
         const filter = (i) => {
             if(i.user.id == interaction.user.id) return true
@@ -126,12 +126,12 @@ export default new Command({
         function repeat(character, number) {
             let i = 1
             let array = []
-            while(i<number) {
+            while(i<=number) {
                 i++
                 array.push(character)
             }
             return array.join(' ')
         }
-        console.log(repeat('_ ', 5))
+        //console.log(repeat('_ ', 5))
     }
 });
