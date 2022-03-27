@@ -115,27 +115,29 @@ export default new Command({
         const collector = msg.createMessageComponentCollector({
             filter,
         })
-        /*collector.on('collect', async (i) => {
+        collector.on("collect", async(i) => {
             if(tries >= 5) {
                 await msg.reply({content: 'You could not get the right word! The game is over'})
                 return collector.stop()
             }
             if(guessed.length <= 4) {
-            const button = msg.components.filter(x => x.components.filter(x => x.customId === i.customId))
-            console.log(button)
-            await i.deferUpdate()
-            guessed.push(i.customId)
-            await msg.edit({content: `${message()}`})
-            } else {
-                const { data } = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join('')}`)
-                if(data.title) {
-                    tries++
-                    guessed = []
-                    await interaction.followUp({content: 'Not a valid word!', ephemeral: true})
-                    return await msg.edit({content: `${message()}`})
+                const button = msg.components.filter(x => x.components.filter(x => x.customId === i.customId))
+                console.log(button)
+                await i.deferUpdate()
+                guessed.push(i.customId)
+                await msg.edit({content: `${message()}`})
+                } 
+                else {
+                    const { data } = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join('')}`)
+                    if(data.title) {
+                        tries++
+                        guessed = []
+                        await interaction.followUp({content: 'Not a valid word!', ephemeral: true})
+                        await msg.edit({content: `${message()}`})
+                        return
+                    }
                 }
-            }
-        })*/
+        })
 
         function repeat(character, number) {
             let i = 1
