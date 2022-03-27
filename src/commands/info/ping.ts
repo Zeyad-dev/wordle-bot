@@ -136,7 +136,7 @@ export default new Command({
                 } 
                 else {
                     console.log(guessed.join(""))
-                    const req = await axios.get(`${encodeURIComponent(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join("").toLowerCase()}`)}`)
+                    const req = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join("").toLowerCase()}`)
                     if(req.data.title) {
                         tries++
                         guessed = []
