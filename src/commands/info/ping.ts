@@ -120,7 +120,7 @@ export default new Command({
                 await msg.reply({content: 'You could not get the right word! The game is over'})
                 return collector.stop()
             }
-            if(guessed.length <= 4) {
+            if(guessed.length < 4) {
                 /*const button = msg.components.filter(x => x.components.filter(x => x.customId === i.customId))
                 console.log(button)*/
                 let finalButton
@@ -130,6 +130,7 @@ export default new Command({
                     })
                 })
                 console.log(finalButton)
+                finalButton.setDisabled(true)
                 await i.deferUpdate()
                 guessed.push(i.customId)
                 await msg.edit({content: `${message()}`})
