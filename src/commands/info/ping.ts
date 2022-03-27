@@ -133,7 +133,7 @@ export default new Command({
                 finalButton.setDisabled(true)
                 await i.deferUpdate()
                 guessed.push(i.customId)
-                await msg.edit({content: `${message()}`})
+                await msg.edit({content: `${message()}`}) 
                 } 
                 else {
                     console.log(guessed.join(""))
