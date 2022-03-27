@@ -121,8 +121,15 @@ export default new Command({
                 return collector.stop()
             }
             if(guessed.length <= 4) {
-                const button = msg.components.filter(x => x.components.filter(x => x.customId === i.customId))
-                console.log(button)
+                /*const button = msg.components.filter(x => x.components.filter(x => x.customId === i.customId))
+                console.log(button)*/
+                let finalButton
+                const button = msg.components.forEach((array) => {
+                    array.forEach((b) => {
+                        if(b.customId === i.customId) return finalButton = b
+                    })
+                })
+                console.log(finalButton)
                 await i.deferUpdate()
                 guessed.push(i.customId)
                 await msg.edit({content: `${message()}`})
