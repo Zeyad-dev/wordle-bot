@@ -125,7 +125,7 @@ export default new Command({
                 console.log(button)*/
                 let finalButton
                 const button = msg.components.forEach((array) => {
-                    array.forEach((b) => {
+                    array.components.forEach((b) => {
                         if(b.customId === i.customId) return finalButton = b
                     })
                 })
