@@ -144,7 +144,7 @@ export default new Command({
                         await msg.edit({content: `${message()}`})
                         return
                 } else {
-                    msg.reply({content: 'game over. correct word'})
+                    msg.reply({content: 'game over. correct word'}) 
                 }
                 }
         })
