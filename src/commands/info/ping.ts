@@ -106,14 +106,14 @@ export default new Command({
         const guessed = []
         console.log(word)
         const message = '```' + `${guessed.length == 5 ? guessed.join(" ") : guessed.join(" ") + repeat('_ ', guessed.length - 5)}` + '```'
-        const msg : Message = await interaction.reply({content: `${message}`, components: components(false), fetchReply: true})
+        const msg : Message = (await interaction.reply({content: `${message}`, components: components(false), fetchReply: true}) as Message)
         const filter = (i) => {
             if(i.user.id == interaction.user.id) return true
             else return void i.reply({content: 'This game is not your\'s!', ephemeral: true})
         }
         const collector = msg.createMessageComponentCollector({
             filter,
-            type: 'BUTTON'
+            collectorType: 'BUTTON'
         })
         collector.on('collect', async (i) => {
             if(guessed.length <= 5) {
