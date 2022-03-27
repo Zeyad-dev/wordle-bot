@@ -137,7 +137,7 @@ export default new Command({
                 else {
                     console.log(guessed.join(""))
                     const req = await axios.get(`${encodeURIComponent(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join("").toLowerCase()}`)}`)
-                    if(req.data.title) {
+                    if(req.data.title) { 
                         tries++
                         guessed = []
                         await interaction.followUp({content: 'Not a valid word!', ephemeral: true})
