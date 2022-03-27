@@ -135,6 +135,7 @@ export default new Command({
                 await msg.edit({content: `${message()}`})
                 } 
                 else {
+                    console.log(guessed.join(""))
                     const req = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join('')}`)
                     if(req.data.title) {
                         tries++
