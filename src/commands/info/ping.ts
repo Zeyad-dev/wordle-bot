@@ -136,14 +136,16 @@ export default new Command({
                 } 
                 else {
                     console.log(guessed.join(""))
-                    const req = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join("").toLowerCase()}`)
-                    if(req.data.title) {
+                    const req = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join("").toLowerCase()}`).catch((e) => {})
+                    if(!req) {
                         tries++
                         guessed = []
                         await interaction.followUp({content: 'Not a valid word!', ephemeral: true})
                         await msg.edit({content: `${message()}`})
                         return
-                    }
+                } else {
+                    msg.reply({content: 'game over. correct word'})
+                }
                 }
         })
 
