@@ -113,7 +113,6 @@ export default new Command({
         }
         const collector = msg.createMessageComponentCollector({
             filter,
-            collectorType: 'BUTTON'
         })
         collector.on('collect', async (i) => {
             if(guessed.length <= 5) {
