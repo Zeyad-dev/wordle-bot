@@ -105,7 +105,31 @@ export default new Command({
         ]
         const guessed = []
         console.log(word)
-        const message = '```' + `${word[0].split('').map(x => guessed.includes(x) ? x : '_ ').join('')}` + '```'
-        interaction.reply({content: `${message}`, components: components(false)})
+        const message = '```' + `${guessed.length == 5 ? guessed.join(" ") : guessed.join(" ") + repeat('_ ', guessed.length - 5)}` + '```'
+        const msg = await interaction.reply({content: `${message}`, components: components(false)})
+        const filter = (i) => {
+            if(i.user.id == interaction.user.id) return true
+            else return void i.reply({content: 'This game is not your\'s!', ephemeral: true})
+        }
+        const collector = msg.createMessageComponentCollector({
+            filter,
+            type: 'BUTTON'
+        })
+        collector.on('collect', async (i) => {
+            if(guessed.length <= 5) {
+            guessed.push(i.value)
+            msg.edit({content: `${message}`})
+            }
+        })
+
+
+        //https://api.dictionaryapi.dev/api/v2/entries/en/dog
+        function repeat(character, number) {
+            let i = 1
+            while(i<number) {
+                i++
+                return character
+            }
+        }
     }
 });
