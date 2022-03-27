@@ -128,8 +128,8 @@ export default new Command({
                 await msg.edit({content: `${message()}`})
                 } 
                 else {
-                    const { data } = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join('')}`)
-                    if(data.title) {
+                    const req = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join('')}`)
+                    if(req.data.title) {
                         tries++
                         guessed = []
                         await interaction.followUp({content: 'Not a valid word!', ephemeral: true})
