@@ -1,6 +1,6 @@
 import { Command } from "../../structures/Command";
 import randomword from 'random-words'
-import { MessageEmbed, MessageActionRow, MessageButton } from 'discord.js'
+import { MessageEmbed, MessageActionRow, MessageButton, Message} from 'discord.js'
 export default new Command({
     name: "wordle",
     description: "wordle game",
@@ -106,7 +106,7 @@ export default new Command({
         const guessed = []
         console.log(word)
         const message = '```' + `${guessed.length == 5 ? guessed.join(" ") : guessed.join(" ") + repeat('_ ', guessed.length - 5)}` + '```'
-        const msg = await interaction.reply({content: `${message}`, components: components(false)})
+        const msg : Message = await interaction.reply({content: `${message}`, components: components(false)})
         const filter = (i) => {
             if(i.user.id == interaction.user.id) return true
             else return void i.reply({content: 'This game is not your\'s!', ephemeral: true})
