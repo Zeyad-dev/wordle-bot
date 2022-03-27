@@ -125,10 +125,12 @@ export default new Command({
         //https://api.dictionaryapi.dev/api/v2/entries/en/dog
         function repeat(character, number) {
             let i = 1
+            let array = []
             while(i<number) {
                 i++
-                return character
+                array.push(character)
             }
+            return array.join(' ')
         }
         console.log(repeat('_ ', 5))
     }
