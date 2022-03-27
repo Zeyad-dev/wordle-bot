@@ -5,9 +5,9 @@ export default new Command({
     name: "wordle",
     description: "wordle game",
     run: async ({ interaction }) => {
-        let word = randomword(1, {maxLength: 5})
-        while(word[0].includes('z') && word[0].length !== 5) {
-            word = randomword(1, {maxLength: 5})
+        let word = randomword(1, {maxLength: 5, minLength: 5})
+        while(word[0].includes('z')) {
+            word = randomword(1, {maxLength: 5, minLength: 5})
         }
         const components = (state) => [
             new MessageActionRow()
