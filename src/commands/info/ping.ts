@@ -116,7 +116,7 @@ export default new Command({
         })
         collector.on('collect', async (i) => {
             if(guessed.length <= 5) {
-            guessed.push(i.value)
+            guessed.push(i.customId)
             msg.edit({content: `${message}`})
             }
         })
