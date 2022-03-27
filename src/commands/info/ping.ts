@@ -130,5 +130,6 @@ export default new Command({
                 return character
             }
         }
+        console.log(repeat('_ ', 5))
     }
 });
