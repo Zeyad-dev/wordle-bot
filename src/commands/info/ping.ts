@@ -105,8 +105,7 @@ export default new Command({
         ]
         const guessed = []
         console.log(word)
-        const message = '```' + `${guessed.length === 5 ? guessed.join(" ") : guessed.join(" ") + repeat('_ ', 5 - guessed.length)}` + '```'
-        const msg : Message = (await interaction.reply({content: `${message}`, components: components(false), fetchReply: true}) as Message)
+        const msg : Message = (await interaction.reply({content: `${message()}`, components: components(false), fetchReply: true}) as Message)
         const filter = (i) => {
             if(i.user.id == interaction.user.id) return true
             else return void i.reply({content: 'This game is not your\'s!', ephemeral: true})
@@ -116,8 +115,9 @@ export default new Command({
         })
         collector.on('collect', async (i) => {
             if(guessed.length <= 5) {
+            await i.deferUpdate()
             guessed.push(i.customId)
-            msg.edit({content: `${message}`})
+            msg.edit({content: `${message()}`})
             }
         })
 
@@ -132,6 +132,8 @@ export default new Command({
             }
             return array.join(' ')
         }
-        //console.log(repeat('_ ', 5))
+        function message() {
+            return '```' + `${guessed.length === 5 ? guessed.join(" ") : guessed.join(" ") + repeat('_', 5 - guessed.length)}` + '```'
+        }
     }
 });
