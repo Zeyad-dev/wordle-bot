@@ -133,7 +133,7 @@ export default new Command({
                 finalButton.setDisabled(true)
                 await i.deferUpdate()
                 guessed.push(i.customId)
-                await msg.edit({content: `${message()}`})
+                msg.edit({content: `${message()}`})
                 if(guessed.length == 4) {
                 const req = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join("").toLowerCase()}`).catch((e) => {})
                 if(!req) {
