@@ -120,7 +120,7 @@ export default new Command({
                 await msg.reply({content: 'You could not get the right word! The game is over'})
                 return collector.stop()
             }
-            if(guessed.length < 4) {
+            if(guessed.length <= 4) {
                 /*const button = msg.components.filter(x => x.components.filter(x => x.customId === i.customId))
                 console.log(button)*/
                 let finalButton
@@ -133,8 +133,20 @@ export default new Command({
                 finalButton.setDisabled(true)
                 await i.deferUpdate()
                 guessed.push(i.customId)
-                await msg.edit({content: `${message()}`}) 
-                } 
+                await msg.edit({content: `${message()}`})
+                if(guessed.length == 4) {
+                const req = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join("").toLowerCase()}`).catch((e) => {})
+                if(!req) {
+                    tries++
+                    guessed = []
+                    await interaction.followUp({content: 'Not a valid word!', ephemeral: true})
+                    await msg.edit({content: `${message()}`})
+                    return
+            } else {
+                msg.reply({content: 'game over. correct word'})
+            }
+        }
+    } 
                 else {
                     console.log(guessed.join(""))
                     const req = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join("").toLowerCase()}`).catch((e) => {})
