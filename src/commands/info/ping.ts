@@ -134,7 +134,7 @@ export default new Command({
                 await i.deferUpdate()
                 guessed.push(i.customId)
                 msg.edit({content: `${message()}`})
-                if(guessed.length == 4) {
+                if(guessed.length == 5) {
                 const req = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${guessed.join("").toLowerCase()}`).catch((e) => {})
                 if(!req) {
                     tries++
