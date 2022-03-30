@@ -6,7 +6,7 @@ export default new Command({
     options: [
         {
             name: 'Global',
-            descriprion: 'Whether you want to play with people in other servers or play in the current server.',
+            description: 'Whether you want to play with people in other servers or play in the current server.',
             type: 'BOOLEAN',
             required: true,
         }
