@@ -1,6 +1,6 @@
 import { User } from 'discord.js'
 interface Data {
-    players? : Class[],
+    players? : class[],
     global? : Boolean,
     host?: User
 }
@@ -9,8 +9,8 @@ export class Queue {
     public globalGame
     public host
     constructor(data? : Data) {
-        this.players = data?.players ? data?.players : []
-        this.globalGame = data?.global ? true : false
-        this.host = data?.host ? data?.host : null
+        this.players = data?.players ?? []
+        this.globalGame = data?.global ?? false
+        this.host = data?.host ?? null
     }
 }
