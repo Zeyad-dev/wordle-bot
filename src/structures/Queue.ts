@@ -5,6 +5,9 @@ interface Data {
     host?: User
 }
 export class Queue {
+    public players
+    public globalGame
+    public host
     constructor(data? : Data) {
         this.players = data?.players ? data?.players : []
         this.globalGame = data?.global ? true : false
