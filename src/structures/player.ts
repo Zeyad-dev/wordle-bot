@@ -1,5 +1,5 @@
 import { User } from 'discord.js'
-abstract class player {
+export abstract class player {
     constructor(public user: User) {}
 }
 class CrewMate extends player {
