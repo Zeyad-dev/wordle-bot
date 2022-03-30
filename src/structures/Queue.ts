@@ -1,6 +1,7 @@
 import { User } from 'discord.js'
+import { player } from './player'
 interface Data {
-    players? : class[],
+    players? : player[],
     global? : Boolean,
     host?: User
 }
