@@ -5,7 +5,7 @@ export default new Command({
     description: 'amongus',
     options: [
         {
-            name: 'Global',
+            name: 'global',
             description: 'Whether you want to play with people in other servers or play in the current server.',
             type: 'BOOLEAN',
             required: true,
