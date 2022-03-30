@@ -1,7 +1,7 @@
 import { Command } from '../../structures/Command'
 import { Imposter, CrewMate } from '../../structures/player'
 export default new Command({
-    name: 'amongus', 
+    name: 'amongus',
     description: 'amongus',
     options: [
         {
