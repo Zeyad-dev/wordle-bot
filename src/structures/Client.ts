@@ -9,12 +9,13 @@ import glob from "glob";
 import { promisify } from "util";
 import { RegisterCommandsOptions } from "../typings/client";
 import { Event } from "./Event";
+import { Queue } from './Queue'
 
 const globPromise = promisify(glob);
 
 export class ExtendedClient extends Client {
     commands: Collection<string, CommandType> = new Collection();
-
+    queue = new Queue()
     constructor() {
         super({ intents: 32767 });
     }
