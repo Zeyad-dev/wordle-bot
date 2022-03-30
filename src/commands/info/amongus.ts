@@ -15,7 +15,7 @@ export default new Command({
         let randomNumber = Math.floor(Math.random() * 10)
         const queue = client.queue
         let userClass
-        if(interaction.options.getBoolean('Global')) queue.globalGame == true
+        if(interaction.options.getBoolean('global')) queue.globalGame == true
         else queue.globalGame == false
         if(queue.players.length <= 0) queue.host == interaction.user
         if(randomNumber == 1 || randomNumber == 2) {
