@@ -3,7 +3,7 @@ import { player } from './player'
 import { Game } from './game'
 import { client } from '..'
 interface Data {
-    players? : player[],
+    players? : User[],
     global? : boolean,
     host?: User
 }
@@ -18,10 +18,10 @@ export class Queue {
         this.globalGame = data?.global ?? false
         this.host = data?.host ?? null
     }
-    addPlayer(player : player, user : User, guild : Guild) { 
+    addPlayer(user : User, guild : Guild) { 
         if(this.players.length >= 10) this.startGame(guild)
         if(this.players.length <= 0) this.host = user
-        this.players.push(player)
+        this.players.push(user)
     }
     startGame(guild: Guild) {
         new Game({
