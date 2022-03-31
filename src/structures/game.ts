@@ -15,17 +15,15 @@ export class Game {
         this.setRoles()
     }
     setRoles() {
-        for(let i = 0; i<=2; i++) {
+        for(let i = 1; i<=2; i++) {
             let random = Math.floor(Math.random() * this.players.length)
             this.finalPlayers.push(new Imposter(this.players[random]))
             this.players.splice(random, 1)
         }
-        for(let i = 0; i<=8; i++) {
+        for(let i = 1; i<=8; i++) {
             let random = Math.floor(Math.random() * this.players.length)
             this.finalPlayers.push(new CrewMate(this.players[random]))
             this.players.splice(random, 1)
         }
-        console.log(this.players)
-        console.log(this.finalPlayers)
     }
 }
