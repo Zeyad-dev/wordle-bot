@@ -36,7 +36,7 @@ export class Queue {
         }
     }
     sendEmbed(user: User, message: Message) {
-        if(!this.embed) this.embed = new MessageEmbed()
+        if(!this.embed) this.embed = new MessageEmbed() 
         if(user.id == this.host.id) {
             this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').addField('Player count:', `${this.players.length}`).setColor('RED').setAuthor({name: `${user.username}`, iconURL: `${user.displayAvatarURL()}`})
             const buttons = (array : string[]) => [
