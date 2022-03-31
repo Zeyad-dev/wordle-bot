@@ -32,7 +32,7 @@ export class Queue {
         if(this.globalGame) {
         client.queue = new Queue()
         } else {
-        client.guild.splice(client.guildQueue.findIndex(x => x.guild == guild.id), 1)
+        client.guildQueue.splice(client.guildQueue.findIndex(x => x.guild == guild.id), 1)
         }
     }
     sendEmbed(user: User, message: Message) {
