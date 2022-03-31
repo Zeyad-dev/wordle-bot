@@ -16,6 +16,7 @@ const globPromise = promisify(glob);
 export class ExtendedClient extends Client {
     commands: Collection<string, CommandType> = new Collection();
     queue = new Queue()
+    guildQueue = []
     constructor() {
         super({ intents: 32767 });
     }

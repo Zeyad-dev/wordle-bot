@@ -1,6 +1,7 @@
-import { User, MessageEmbed, Message, MessageActionRow, MessageButton } from 'discord.js'
+import { User, MessageEmbed, Message, MessageActionRow, MessageButton, Guild } from 'discord.js'
 import { player } from './player'
 import { Game } from './game'
+import { client } from '..'
 interface Data {
     players? : player[],
     global? : Boolean,
@@ -17,17 +18,22 @@ export class Queue {
         this.globalGame = data?.global ?? false
         this.host = data?.host ?? null
     }
-    addPlayer(player : player, user : User) { 
-        if(this.players.length >= 10) this.startGame()
+    addPlayer(player : player, user : User, guild : Guild) { 
+        if(this.players.length >= 10) this.startGame(guild)
         if(this.players.length <= 0) this.host = user
         this.players.push(player)
     }
-    startGame() {
+    startGame(guild: Guild) {
         new Game({
             players: this.players,
             gameOptions: this.gameOptions
         })
         console.log('Game started')
+        if(this.globalGame) {
+        client.queue = new Queue()
+        } else {
+        client.guild.splice(client.guildQueue.findIndex(x => x.guild == guild.id), 1)
+        }
     }
     sendEmbed(user: User, message: Message) {
         if(!this.embed) this.embed = new MessageEmbed()

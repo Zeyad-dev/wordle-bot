@@ -13,10 +13,10 @@ export default new Command({
     ],
     run: async ({client, interaction}) => {
         let randomNumber = Math.floor(Math.random() * 10)
-        const queue = client.queue
         let userClass
-        if(interaction.options.getBoolean('global')) queue.globalGame = true
-        else queue.globalGame = false
+        if(interaction.options.getBoolean('global')) {
+            const queue = client.queue
+        queue.globalGame = true
         let numberOfImposters = 1
         if(randomNumber == 1 || randomNumber == 2 && numberOfImposters <= 2) {
             numberOfImposters++
@@ -24,7 +24,19 @@ export default new Command({
         } else {
             userClass = new CrewMate(interaction.user)
         }
-        queue.addPlayer(userClass, interaction.user)
+        queue.addPlayer(userClass, interaction.user, interaction.guild)
         console.log(queue)
+    } else {
+        const queue
+        const index = client.guildQueue.findIndex(x => x.guild == interaction.guild.id)
+        if(index == -1) {
+            queue = client.guildQueue.push({
+                guild: interaction.guild.id,
+                queue: new Queue({globalGame : false})
+            }).queue
+        } else queue = client.guildQueue[index].queue
+        console.log(queue)
+
+    }
     }
 })
