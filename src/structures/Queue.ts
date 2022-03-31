@@ -14,4 +14,8 @@ export class Queue {
         this.globalGame = data?.global ?? false
         this.host = data?.host ?? null
     }
+    addPlayer(player : Player, user : User) {
+        if(this.players.length <= 0) this.host = user
+        this.players.push(player)
+    }
 }

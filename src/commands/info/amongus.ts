@@ -15,15 +15,14 @@ export default new Command({
         let randomNumber = Math.floor(Math.random() * 10)
         const queue = client.queue
         let userClass
-        if(interaction.options.getBoolean('global')) queue.globalGame == true
-        else queue.globalGame == false
-        if(queue.players.length <= 0) queue.host == interaction.user
+        if(interaction.options.getBoolean('global')) queue.globalGame = true
+        else queue.globalGame = false
         if(randomNumber == 1 || randomNumber == 2) {
             userClass = new Imposter(interaction.user)
         } else {
             userClass = new CrewMate(interaction.user)
         }
-        queue.players.push(userClass)
+        queue.addPlayer(userClass, interaction.user)
         console.log(queue)
     }
 })
