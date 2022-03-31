@@ -33,7 +33,7 @@ export default new Command({
         if(index == -1) {
             let queueObject = client.guildQueue.push({
                 guild: interaction.guild.id,
-                queue: new Queue({globalGame : false})
+                queue: new Queue({global : false})
             })
             queue = client.guildQueue[queueObject - 1].queue
         } else queue = client.guildQueue[index].queue
