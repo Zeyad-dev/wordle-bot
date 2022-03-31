@@ -17,7 +17,9 @@ export default new Command({
             '1','2','3','4','5','6','7','8','9','10'
         ]
         let randomNumber = Math.floor(Math.random() * arrayOfNums.length)
+        console.log(arrayOfNums[randomNumber])
         arrayOfNums.splice(randomNumber, 1)
+        console.log(arrayOfNums)
         let userClass
         let numberOfImposters = 2
         let numberOfCrewMates = 8
