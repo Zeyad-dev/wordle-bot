@@ -13,18 +13,18 @@ export default new Command({
         }
     ],
     run: async ({client, interaction}) => {
-        let randomNumber = Math.floor(Math.random() * 10)
+        let arrayOfNums = [
+            '1','2','3','4','5','6','7','8','9','10'
+        ]
+        let randomNumber = Math.floor(Math.random() * arrayOfNums.length)
+        arrayOfNums.splice(randomNumber, 1)
         let userClass
+        let numberOfImposters = 2
+        let numberOfCrewMates = 8
+
         if(interaction.options.getBoolean('global')) {
             const queue = client.queue
         queue.globalGame = true
-        let numberOfImposters = 1
-        if(randomNumber == 1 || randomNumber == 2 && numberOfImposters <= 2) {
-            numberOfImposters++
-            userClass = new Imposter(interaction.user)
-        } else {
-            userClass = new CrewMate(interaction.user)
-        }
         queue.addPlayer(userClass, interaction.user, interaction.guild)
         console.log(queue)
     } else {
@@ -37,6 +37,7 @@ export default new Command({
             })
             queue = client.guildQueue[queueObject - 1].queue
         } else queue = client.guildQueue[index].queue
+        queue.addPlayer(userClass, interaction.user, interaction.guild)
         console.log(queue)
 
     }
