@@ -11,6 +11,7 @@ export class Game {
     constructor(data : Data) {
         this.players = data.players
         this.gameOptions = data.gameOptions
+        this.setRoles()
     }
     setRoles() {
         for(let i = 0; i<=2; i++) {
@@ -26,5 +27,4 @@ export class Game {
         console.log(this.players)
         console.log(this.finalPlayers)
     }
-    setRoles()
 }
