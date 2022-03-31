@@ -1,4 +1,5 @@
 import { Command } from '../../structures/Command'
+import { Queue } from '../../structures/Queue'
 import { Imposter, CrewMate } from '../../structures/player'
 export default new Command({
     name: 'amongus',
@@ -32,7 +33,7 @@ export default new Command({
         if(index == -1) {
             let queueObject = client.guildQueue.push({
                 guild: interaction.guild.id,
-                queue: new queue({globalGame : false})
+                queue: new Queue({globalGame : false})
             })
             queue = client.guildQueue[queueObject - 1].queue
         } else queue = client.guildQueue[index].queue
