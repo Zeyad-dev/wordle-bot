@@ -45,7 +45,7 @@ export class Queue {
                     new MessageButton()
                     .setLabel('Number of meetings per player')
                     .setStyle('SECONDARY')
-                    .setDisabled(array.includes('meeting') ? true : false)
+                    .setDisabled(array.includes('meetings') ? true : false)
                     .setCustomId('meetings')
                 )
             ]
