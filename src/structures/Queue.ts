@@ -4,7 +4,7 @@ import { Game } from './game'
 import { client } from '..'
 interface Data {
     players? : player[],
-    global? : Boolean,
+    global? : boolean,
     host?: User
 }
 export class Queue {
@@ -39,13 +39,13 @@ export class Queue {
         if(!this.embed) this.embed = new MessageEmbed()
         if(user.id == this.host.id) {
             this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').addField('Player count:', `${this.players.length}`).setColor('RED').setAuthor({name: `${user.username}`, iconURL: `${user.displayAvatarURL()}`})
-            const buttons = [
+            const buttons = (array : string[]) => [
                 new MessageActionRow()
                 .addComponents(
                     new MessageButton()
                     .setLabel('Number of meetings per player')
                     .setStyle('SECONDARY')
-                    .setDisabled(false)
+                    .setDisabled(array.includes('meeting') ? true : false)
                     .setCustomId('meetings')
                 )
             ]
