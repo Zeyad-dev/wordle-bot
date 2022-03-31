@@ -17,7 +17,9 @@ export default new Command({
         let userClass
         if(interaction.options.getBoolean('global')) queue.globalGame = true
         else queue.globalGame = false
-        if(randomNumber == 1 || randomNumber == 2) {
+        let numberOfImposters = 1
+        if(randomNumber == 1 || randomNumber == 2 && numberOfImposters <= 2) {
+            numberOfImposters++
             userClass = new Imposter(interaction.user)
         } else {
             userClass = new CrewMate(interaction.user)
