@@ -1,4 +1,5 @@
 import { Imposter, CrewMate } from './player'
+import { User } from 'discord.js'
 interface Data {
     players: User[],
     gameOptions: any[]

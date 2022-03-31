@@ -22,6 +22,7 @@ export class Queue {
         if(this.players.length >= 10) this.startGame(guild)
         if(this.players.length <= 0) this.host = user
         this.players.push(user)
+        console.log(user)
     }
     startGame(guild: Guild) {
         new Game({
