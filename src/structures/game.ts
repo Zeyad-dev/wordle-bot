@@ -1,4 +1,4 @@
-import { Imposter, CrewMate } from './player'
+import { Imposter, CrewMate, player } from './player'
 import { User } from 'discord.js'
 interface Data {
     players: User[],
@@ -6,7 +6,7 @@ interface Data {
 }
 export class Game {
     public players
-    public finalPlayers
+    public finalPlayers : player[]
     public gameOptions
     constructor(data : Data) {
         this.players = data.players
