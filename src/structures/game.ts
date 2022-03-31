@@ -26,4 +26,5 @@ export class Game {
         console.log(this.players)
         console.log(this.finalPlayers)
     }
+    setRoles()
 }
