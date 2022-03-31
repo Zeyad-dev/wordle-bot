@@ -6,11 +6,12 @@ interface Data {
 }
 export class Game {
     public players
-    public finalPlayers : player[]
+    public finalPlayers : any[]
     public gameOptions
     constructor(data : Data) {
         this.players = data.players
         this.gameOptions = data.gameOptions
+        this.finalPlayers = []
         this.setRoles()
     }
     setRoles() {
