@@ -27,6 +27,7 @@ export class Queue {
             players: this.players,
             gameOptions: this.gameOptions
         })
+        console.log('Game started')
     }
     sendEmbed(user: User, message: Message) {
         if(!this.embed) this.embed = new MessageEmbed()
