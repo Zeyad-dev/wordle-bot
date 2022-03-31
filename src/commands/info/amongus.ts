@@ -27,12 +27,12 @@ export default new Command({
         queue.addPlayer(userClass, interaction.user, interaction.guild)
         console.log(queue)
     } else {
-        const queue
+        let queue
         const index = client.guildQueue.findIndex(x => x.guild == interaction.guild.id)
         if(index == -1) {
             queue = client.guildQueue.push({
                 guild: interaction.guild.id,
-                queue: new Queue({globalGame : false})
+                queue: new queue({globalGame : false})
             }).queue
         } else queue = client.guildQueue[index].queue
         console.log(queue)
