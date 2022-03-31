@@ -34,7 +34,7 @@ export default new Command({
                 guild: interaction.guild.id,
                 queue: new queue({globalGame : false})
             })
-            queue = queueObject.queue
+            queue = client.guildQueue[queueObject - 1].queue
         } else queue = client.guildQueue[index].queue
         console.log(queue)
 
