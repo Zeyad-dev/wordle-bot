@@ -40,20 +40,41 @@ export class Queue {
         client.guildQueue.splice(client.guildQueue.findIndex(x => x.guild == guild.id), 1)
         }
     }
-    sendEmbed(user: User, message: Message) {
+    sendEmbed(user: User) {
         if(!this.embed) this.embed = new MessageEmbed()
         if(user.id == this.host.id) {
             this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').addField('Player count:', `${this.players.length}`).setColor('RED').setAuthor({name: `${user.username}`, iconURL: `${user.displayAvatarURL()}`})
-            const buttons = (array : string[]) => [
+            const buttons = (array? : string[]) => [
                 new MessageActionRow()
                 .addComponents(
                     new MessageButton()
-                    .setLabel('Number of meetings per player')
+                    .setLabel('Number of emergency meetings')
                     .setStyle('SECONDARY')
-                    .setDisabled(array.includes('meetings') ? true : false)
-                    .setCustomId('meetings')
+                    .setDisabled(array?.includes('meetings') || array?.includes('all') ? true : false)
+                    .setCustomId('meetings'),
+                    new MessageButton()
+                    .setLabel('Emergency Cooldown')
+                    .setStyle('SECONDARY')
+                    .setDisabled(array?.includes('cooldown') || array?.includes('all') ? true : false)
+                    .setCustomId('cooldown'),
+                    new MessageButton()
+                    .setLabel('Discussion Time')
+                    .setStyle('SECONDARY')
+                    .setDisabled(array?.includes('discussion') || array?.includes('all') ? true : false)
+                    .setCustomId('discussion'),
+                    new MessageButton()
+                    .setLabel('Voting Time')
+                    .setStyle('SECONDARY')
+                    .setDisabled(array?.includes('voting') || array?.includes('all') ? true : false)
+                    .setCustomId('voting'),
+                    new MessageButton()
+                    .setLabel('Kill Cooldown')
+                    .setStyle('SECONDARY')
+                    .setDisabled(array?.includes('kill') || array?.includes('all') ? true : false)
+                    .setCustomId('kill'),
                 )
             ]
+            return user.send({embeds: [this.embed], components: buttons()})
         } else {
 
         }
