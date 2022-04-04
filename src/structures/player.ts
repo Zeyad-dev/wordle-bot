@@ -1,10 +1,14 @@
-import { User } from 'discord.js'
+import { User, Message, MessageAttachment } from 'discord.js'
 interface Data {
     location: string,
     tasks: string[]
 }
 export abstract class player {
     constructor(public user: User, public type: string) {}
+    changeLocation(location : string, message: Message) {
+        const attachment = new MessageAttachment(`../images/${location.replace(' ', "_")}`, 'location')
+        message.reply({files: [attachment]})
+    }
 }
 export class CrewMate extends player {
     constructor(public user: User) {
