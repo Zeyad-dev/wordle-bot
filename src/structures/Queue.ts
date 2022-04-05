@@ -27,7 +27,9 @@ export class Queue {
             return this.startGame(interaction.guild)
         }
         if (this.players.length <= 0) this.host = interaction.user
+        this.players.forEach(async player => await this.sendEmbed(player, interaction, true))
         this.players.push(interaction.user)
+        await this.sendEmbed(interaction.user, interaction, false)
     }
     startGame(guild: Guild) {
         new Game({
