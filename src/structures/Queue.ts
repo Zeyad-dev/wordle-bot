@@ -42,11 +42,7 @@ export class Queue {
         }
     }
     sendEmbed(user: User, interaction : CommandInteraction, editMessage: boolean) {
-        if(editMessage) {
-        if(!this.embed) this.embed = new MessageEmbed()
-        if(user.id == this.host.id) {
-            this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').addField('Player count:', `${this.players.length}`).setColor('RED').setAuthor({name: `${user.username}`, iconURL: `${user.displayAvatarURL()}`})
-            const buttons = (array? : string[]) => [
+        const buttons = (array? : string[]) => [
                 new MessageActionRow()
                 .addComponents(
                     new MessageButton()
@@ -84,6 +80,10 @@ export class Queue {
                     .setCustomId('kill'),
                 )
             ]
+        if(editMessage) {
+        if(!this.embed) this.embed = new MessageEmbed()
+        if(user.id == this.host.id) {
+            this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').addField('Player count:', `${this.players.length}`).setColor('RED').setAuthor({name: `${user.username}`, iconURL: `${user.displayAvatarURL()}`})
             const msg = await interaction.reply({content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons(), fetchReply: true, ephemeral: true})
             this.playerObject.push({user: user.id, message: msg})
             msg.createMessageComponentCollector()
