@@ -21,7 +21,7 @@ export class Queue {
     }
     async addPlayer(interaction: CommandInteraction) {
         if (this.players.length >= 9) {
-            this.players.forEach(player => await this.sendEmbed(player, interaction, true))
+            this.players.forEach(async player => await this.sendEmbed(player, interaction, true))
             this.players.push(interaction.user)
             await this.sendEmbed(interaction.user, interaction, false)
             return this.startGame(interaction.guild)
