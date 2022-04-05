@@ -13,7 +13,7 @@ export class Queue {
     public host
     public embed: MessageEmbed
     private gameOptions
-    public playerObject: object[]
+    public playerObject = []
     constructor(data?: Data) {
         this.players = data?.players ?? []
         this.globalGame = data?.global ?? false
