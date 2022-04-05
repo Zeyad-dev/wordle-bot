@@ -19,16 +19,15 @@ export class Queue {
         this.globalGame = data?.global ?? false
         this.host = data?.host ?? null
     }
-    addPlayer(interaction: CommandInteraction) {
+    async addPlayer(interaction: CommandInteraction) {
         if (this.players.length >= 9) {
             this.players.forEach(player => await this.sendEmbed(player, interaction, true))
             this.players.push(interaction.user)
             await this.sendEmbed(interaction.user, interaction, false)
             return this.startGame(interaction.guild)
         }
-        if (this.players.length <= 0) this.host = user
-        this.players.push(user)
-        console.log(user)
+        if (this.players.length <= 0) this.host = interaction.user
+        this.players.push(interaction.user)
     }
     startGame(guild: Guild) {
         new Game({
@@ -85,7 +84,7 @@ export class Queue {
             if (!this.embed) this.embed = new MessageEmbed()
             if (user.id == this.host.id) {
                 this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').addField('Player count:', `${this.players.length}`).setColor('RED').setAuthor({ name: `${user.username}`, iconURL: `${user.displayAvatarURL()}` })
-                const msg = await interaction.reply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons(), fetchReply: true, ephemeral: true })
+                const msg = await interaction.reply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons(), fetchReply: true, ephemeral: true }) as Message
                 this.playerObject.push({ user: user.id, message: msg })
                 const collector = msg.createMessageComponentCollector()
                 collector.on('collect', async (i) => {
@@ -100,9 +99,9 @@ export class Queue {
                 })
             } else {
                 if (user.id == this.host.id) {
-                    await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons(), fetchReply: true, ephemeral: true })
+                    await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
                 } else {
-                    await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`, fetchReply: true, ephemeral: true })
+                    await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`})
                 }
             }
         }
