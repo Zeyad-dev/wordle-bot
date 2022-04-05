@@ -82,7 +82,7 @@ export class Queue {
                         .setCustomId('kill'),
                 )
         ]
-        if (editMessage) {
+        if (!editMessage) {
             if (!this.embed) this.embed = new MessageEmbed()
             if (user.id == this.host.id) {
                 this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').addField('Player count:', `${this.players.length}`).setColor('RED').setAuthor({ name: `${user.username}`, iconURL: `${user.displayAvatarURL()}` })
@@ -100,13 +100,15 @@ export class Queue {
 
                 })
             } else {
+                return await interaction.reply({ content: `Players found: ${this.players.length}/**10**`, ephemeral: true, fetchReply: true})
+            }
+        } else {
                 if (user.id == this.host.id) {
-                    await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
+                    return await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
                 } else {
-                    await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`})
+                    return await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`})
                 }
             }
-        }
     }
 
 }
