@@ -2,7 +2,7 @@ import { Imposter, CrewMate, player } from './player'
 import { User } from 'discord.js'
 interface Data {
     players: User[],
-    gameOptions: any[]
+    gameOptions: object[]
 }
 export class Game {
     public players

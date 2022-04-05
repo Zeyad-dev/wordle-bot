@@ -16,7 +16,7 @@ export default new Command({
         if(interaction.options.getBoolean('global')) {
         const queue = client.queue
         queue.globalGame = true
-        queue.addPlayer(interaction.user, interaction.guild)
+        queue.addPlayer(interaction)
     } else {
         let queue
         const index = client.guildQueue.findIndex(x => x.guild == interaction.guild.id)
@@ -27,7 +27,7 @@ export default new Command({
             })
             queue = client.guildQueue[queueObject - 1].queue
         } else queue = client.guildQueue[index].queue
-        queue.addPlayer(interaction.user, interaction.guild)
+        queue.addPlayer(interaction)
 
     }
     }
