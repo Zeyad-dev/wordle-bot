@@ -103,10 +103,11 @@ export class Queue {
                 return await interaction.reply({ content: `Players found: ${this.players.length}/**10**`, ephemeral: true, fetchReply: true})
             }
         } else {
+            const object = this.playerObject[this.playerObject.findIndex(x => x.user == interaction.user.id)]
                 if (user.id == this.host.id) {
-                    return await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
+                    return await object.message.edit({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
                 } else {
-                    return await interaction.editReply({ content: `Players found: ${this.players.length}/**10**`})
+                    return await object.message.edit({ content: `Players found: ${this.players.length}/**10**`})
                 }
             }
     }
