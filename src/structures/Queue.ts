@@ -13,7 +13,12 @@ export class Queue {
     public host
     public embed: MessageEmbed
     private gameOptions = {
-        numberOfImposters : 2
+        numberOfImposters : 2,
+        numberOfEmergencyMeetings : 2,
+        emergencyCooldown : 30000,
+        discussionTime : 40000,
+        votingTime : 40000,
+        killCooldown : 30000
     }
     public playerObject = []
     constructor(data?: Data) {
@@ -102,9 +107,11 @@ export class Queue {
                 collector.on('collect', async (i) => {
                     switch (i.customId) {
                         case 'start':
+                            await i.deferUpdate()
                             this.startGame(interaction.guild)
                             break;
                         case 'meetings':
+                            i.reply({content: `Press one of the below buttons to set the number of emergency meetings per player.\nThe current emergency meetings per player is ${String(this.gameOptions.numberOfEmergencyMeetings)}.`})
                             break
                     }
 
