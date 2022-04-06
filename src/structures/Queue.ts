@@ -87,7 +87,7 @@ export class Queue {
             if (user.id == this.host.id) {
                 this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').addField('Player count:', `${this.players.length}`).setColor('RED').setAuthor({ name: `${user.username}`, iconURL: `${user.displayAvatarURL()}` })
                 const msg = await interaction.reply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons(), fetchReply: true, ephemeral: true }) as Message
-                this.playerObject.push({ user: user.id, message: interaction.webhook })
+                this.playerObject.push({ user: user.id, webhook: interaction.webhook, message: msg})
                 const collector = msg.createMessageComponentCollector()
                 collector.on('collect', async (i) => {
                     switch (i.customId) {
@@ -105,9 +105,9 @@ export class Queue {
         } else {
             const object = this.playerObject[this.playerObject.findIndex(x => x.user == interaction.user.id)]
                 if (user.id == this.host.id) {
-                    return await object.message.editMessage({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
+                    return await object.webhook.editMessage(msg, { content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
                 } else {
-                    return await object.message.editMessage({ content: `Players found: ${this.players.length}/**10**`})
+                    return await object.webhook.editMessage(msg, { content: `Players found: ${this.players.length}/**10**`})
                 }
             }
     }
