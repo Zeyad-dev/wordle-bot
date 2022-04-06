@@ -127,7 +127,7 @@ export class Queue {
                                     .setStyle('SECONDARY')
                                     .setCustomId('3'),
                                 )
-                            ]})
+                            ]}) as Message
                             const btncollector = msgg.createMessageComponentCollector()
                             btncollector.on('collect', async (ii) => {
                                 this.gameOptions.numberOfEmergencyMeetings = parseInt(i.customId)
