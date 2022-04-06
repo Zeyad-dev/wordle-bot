@@ -19,7 +19,7 @@ export class Queue {
         discussionTime : 40000,
         votingTime : 40000,
         killCooldown : 30000
-    }
+    };
     public playerObject = []
     constructor(data?: Data) {
         this.players = data?.players ?? []
@@ -34,8 +34,8 @@ export class Queue {
             return this.startGame(interaction.guild)
         }
         if (this.players.length <= 0) this.host = interaction.user
-        this.players.push(interaction.user)
         this.players.forEach(async player => await this.sendEmbed(player, interaction, true))
+        this.players.push(interaction.user)
         await this.sendEmbed(interaction.user, interaction, false)
     }
     startGame(guild: Guild) {
@@ -103,6 +103,7 @@ export class Queue {
                 this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').setColor('RED').setAuthor({ name: `${user.username}`, iconURL: `${user.displayAvatarURL()}` })
                 const msg = await interaction.reply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons(), fetchReply: true, ephemeral: true }) as Message
                 this.playerObject.push({ user: user.id, webhook: interaction.webhook, message: msg})
+                console.log(this.playerObject)
                 const collector = msg.createMessageComponentCollector()
                 collector.on('collect', async (i) => {
                     switch (i.customId) {
