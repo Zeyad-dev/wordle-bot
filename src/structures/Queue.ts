@@ -105,9 +105,9 @@ export class Queue {
         } else {
             const object = this.playerObject[this.playerObject.findIndex(x => x.user == interaction.user.id)]
                 if (user.id == this.host.id) {
-                    return await object.webhook.editMessage(msg, { content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
+                    return await object.webhook.editMessage(object.message, { content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
                 } else {
-                    return await object.webhook.editMessage(msg, { content: `Players found: ${this.players.length}/**10**`})
+                    return await object.webhook.editMessage(object.message, { content: `Players found: ${this.players.length}/**10**`})
                 }
             }
     }
