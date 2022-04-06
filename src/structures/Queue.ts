@@ -27,9 +27,9 @@ export class Queue {
         this.host = data?.host ?? null
     }
     async addPlayer(interaction: CommandInteraction) {
-        if (this.players.length >= 9) {
-            this.players.push(interaction.user)
+        if (this.players.length >= 10) {
             this.players.forEach(async player => await this.sendEmbed(player, interaction, true))
+            this.players.push(interaction.user)
             await this.sendEmbed(interaction.user, interaction, false)
             return this.startGame(interaction.guild)
         }
@@ -103,7 +103,6 @@ export class Queue {
                 this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').setColor('RED').setAuthor({ name: `${user.username}`, iconURL: `${user.displayAvatarURL()}` })
                 const msg = await interaction.reply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons(), fetchReply: true, ephemeral: true }) as Message
                 this.playerObject.push({ user: user.id, webhook: interaction.webhook, message: msg})
-                console.log(this.playerObject)
                 const collector = msg.createMessageComponentCollector()
                 collector.on('collect', async (i) => {
                     switch (i.customId) {
@@ -112,20 +111,21 @@ export class Queue {
                             this.startGame(interaction.guild)
                             break;
                         case 'meetings':
-                            i.reply({content: `Press one of the below buttons to set the number of emergency meetings per player.\nThe current emergency meetings per player is ${String(this.gameOptions.numberOfEmergencyMeetings)}.`})
+                            i.reply({content: `Press one of the below buttons to set the number of emergency meetings per player.\nThe current emergency meetings per player is ${String(this.gameOptions.numberOfEmergencyMeetings)}.`, ephemeral : true})
                             break
                     }
 
                 })
             } else {
                 return await interaction.reply({ content: `Players found: ${this.players.length}/**10**`, ephemeral: true, fetchReply: true})
+                this.playerObject.push({ user: user.id, webhook: interaction.webhook, message: msg})
             }
         } else {
             const object = this.playerObject[this.playerObject.findIndex(x => x.user == interaction.user.id)]
                 if (user.id == this.host.id) {
-                    return await object.webhook.editMessage(object.message, { content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons()})
+                    return await object.webhook.editMessage(object.message, { content: `Players found: ${this.players.length + 1}/**10**`, embeds: [this.embed], components: buttons()})
                 } else {
-                    return await object.webhook.editMessage(object.message, { content: `Players found: ${this.players.length}/**10**`})
+                    return await object.webhook.editMessage(object.message, { content: `Players found: ${this.players.length + 1}/**10**`})
                 }
             }
     }
