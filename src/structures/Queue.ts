@@ -56,7 +56,7 @@ export class Queue {
                 .addComponents(
                     new MessageButton()
                         .setLabel('Start Game')
-                        .setStyle('PRIMARY')
+                        .setStyle(this.players.length >= 7 ? 'SUCCESS' : 'DANGER')
                         .setDisabled(this.players.length >= 7 ? false : true)
                         .setCustomId('start')
                 ),
@@ -111,7 +111,28 @@ export class Queue {
                             this.startGame(interaction.guild)
                             break;
                         case 'meetings':
-                            i.reply({content: `Press one of the below buttons to set the number of emergency meetings per player.\nThe current emergency meetings per player is ${String(this.gameOptions.numberOfEmergencyMeetings)}.`, ephemeral : true})
+                            const msgg = await i.reply({content: `Press one of the below buttons to set the number of emergency meetings per player.\nThe current emergency meetings per player is ${String(this.gameOptions.numberOfEmergencyMeetings)}.`, ephemeral : true, components : [
+                                new MessageActionRow()
+                                .addComponents(
+                                    new MessageButton()
+                                    .setLabel('1')
+                                    .setStyle('SECONDARY')
+                                    .setCustomId('1'),
+                                    new MessageButton()
+                                    .setLabel('2')
+                                    .setStyle('SECONDARY')
+                                    .setCustomId('2'),
+                                    new MessageButton()
+                                    .setLabel('3')
+                                    .setStyle('SECONDARY')
+                                    .setCustomId('3'),
+                                )
+                            ]})
+                            const btncollector = msgg.createMessageComponentCollector()
+                            btncollector.on('collect', async (ii) => {
+                                this.gameOptions.numberOfEmergencyMeetings = parseInt(i.customId)
+                                msgg.delete()
+                            }) 
                             break
                     }
 
