@@ -12,7 +12,9 @@ export class Queue {
     public globalGame
     public host
     public embed: MessageEmbed
-    private gameOptions
+    private gameOptions = {
+        numberOfImposters : 2
+    }
     public playerObject = []
     constructor(data?: Data) {
         this.players = data?.players ?? []
@@ -50,7 +52,7 @@ export class Queue {
                     new MessageButton()
                         .setLabel('Start Game')
                         .setStyle('PRIMARY')
-                        .setDisabled(this.players.length >= 7 ? true : false)
+                        .setDisabled(this.players.length >= 7 ? false : true)
                         .setCustomId('start')
                 ),
             new MessageActionRow()
@@ -80,6 +82,14 @@ export class Queue {
                         .setStyle('SECONDARY')
                         .setDisabled(array?.includes('kill') || array?.includes('all') ? true : false)
                         .setCustomId('kill'),
+                ),
+                new MessageActionRow()
+                .addComponents(
+                    new MessageButton()
+                        .setLabel('Number of Imposters')
+                        .setStyle('SECONDARY')
+                        .setDisabled(array?.includes('imposters') || array?.includes('all') ? true : false)
+                        .setCustomId('meetings'),
                 )
         ]
         if (!editMessage) {
