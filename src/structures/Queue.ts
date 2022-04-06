@@ -21,14 +21,14 @@ export class Queue {
     }
     async addPlayer(interaction: CommandInteraction) {
         if (this.players.length >= 9) {
-            this.players.forEach(async player => await this.sendEmbed(player, interaction, true))
             this.players.push(interaction.user)
+            this.players.forEach(async player => await this.sendEmbed(player, interaction, true))
             await this.sendEmbed(interaction.user, interaction, false)
             return this.startGame(interaction.guild)
         }
         if (this.players.length <= 0) this.host = interaction.user
-        this.players.forEach(async player => await this.sendEmbed(player, interaction, true))
         this.players.push(interaction.user)
+        this.players.forEach(async player => await this.sendEmbed(player, interaction, true))
         await this.sendEmbed(interaction.user, interaction, false)
     }
     startGame(guild: Guild) {
@@ -85,7 +85,7 @@ export class Queue {
         if (!editMessage) {
             if (!this.embed) this.embed = new MessageEmbed()
             if (user.id == this.host.id) {
-                this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').addField('Player count:', `${this.players.length}`).setColor('RED').setAuthor({ name: `${user.username}`, iconURL: `${user.displayAvatarURL()}` })
+                this.embed.setTitle('Host Controls').setDescription('Use the below buttons to change the settings of the game.').setColor('RED').setAuthor({ name: `${user.username}`, iconURL: `${user.displayAvatarURL()}` })
                 const msg = await interaction.reply({ content: `Players found: ${this.players.length}/**10**`, embeds: [this.embed], components: buttons(), fetchReply: true, ephemeral: true }) as Message
                 this.playerObject.push({ user: user.id, webhook: interaction.webhook, message: msg})
                 const collector = msg.createMessageComponentCollector()
