@@ -111,7 +111,7 @@ export class Queue {
                             this.startGame(interaction.guild)
                             break;
                         case 'meetings':
-                            const msgg = await i.reply({content: `Press one of the below buttons to set the number of emergency meetings per player.\nThe current emergency meetings per player is ${String(this.gameOptions.numberOfEmergencyMeetings)}.`, ephemeral : true, components : [
+                            const msgg = await i.reply({content: `Press one of the below buttons to set the number of emergency meetings per player.\nThe current emergency meetings per player is ${this.gameOptions.numberOfEmergencyMeetings}.`, ephemeral : true, components : [
                                 new MessageActionRow()
                                 .addComponents(
                                     new MessageButton()
@@ -130,8 +130,9 @@ export class Queue {
                             ], fetchReply : true}) as Message
                             const btncollector = msgg.createMessageComponentCollector()
                             btncollector.on('collect', async (ii) => {
+                                ii.deferUpdate()
                                 this.gameOptions.numberOfEmergencyMeetings = parseInt(i.customId)
-                                msgg.delete()
+                                ii.editReply({content: `The number of emergency meetings now is set to **${this.gameOptions.numberOfEmergencyMeetings}**`})
                             }) 
                             break
                     }
