@@ -132,7 +132,7 @@ export class Queue {
                             btncollector.on('collect', async (ii) => {
                                 ii.deferUpdate()
                                 this.gameOptions.numberOfEmergencyMeetings = parseInt(i.customId)
-                                msgg.edit({content: `The number of emergency meetings now is set to **${this.gameOptions.numberOfEmergencyMeetings}**`, components: []})
+                                i.editReply({content: `The number of emergency meetings now is set to **${this.gameOptions.numberOfEmergencyMeetings}**`, components: []})
                             }) 
                             break
                     }
