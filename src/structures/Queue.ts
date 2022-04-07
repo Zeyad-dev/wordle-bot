@@ -27,7 +27,7 @@ export class Queue {
         this.host = data?.host ?? null
     }
     async addPlayer(interaction: CommandInteraction) {
-        if (this.players.length >= 10) {
+        if (this.players.length >= 9) {
             this.players.forEach(async player => await this.sendEmbed(player, interaction, true))
             this.players.push(interaction.user)
             await this.sendEmbed(interaction.user, interaction, false)
@@ -132,7 +132,7 @@ export class Queue {
                             btncollector.on('collect', async (ii) => {
                                 ii.deferUpdate()
                                 this.gameOptions.numberOfEmergencyMeetings = parseInt(i.customId)
-                                ii.editReply({content: `The number of emergency meetings now is set to **${this.gameOptions.numberOfEmergencyMeetings}**`})
+                                msgg.edit({content: `The number of emergency meetings now is set to **${this.gameOptions.numberOfEmergencyMeetings}**`, components: []})
                             }) 
                             break
                     }
